@@ -1,0 +1,120 @@
+{% extends 'paginas/base.html' %}
+
+{% block title %}inicio{% endblock %}
+
+{% block content %}
+<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider y Noticias</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tu CSS personalizado -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos para el contenedor del slider */
+        #carouselExampleControls {
+            margin-top: 50px;
+        }
+
+        /* Estilos para el contenedor de noticias */
+        #noticias {
+            background-color: #266479; /* Color de fondo calipso */
+            padding: 20px;
+            border-radius: 15px; /* Bordes redondeados */
+            
+        }
+
+        /* Estilos para las imágenes de las noticias */
+        .card-img-top {
+            border-radius: 15px; /* Bordes redondeados */
+            height: 200px; /* Altura fija para todas las imágenes */
+            object-fit: cover; /* Ajustar la imagen para que cubra toda la caja */
+        }
+        
+         /* Estilo para el título de la empresa */
+         h2 {
+            font-family: 'Harlow Solid'; /* Cambia la fuente */
+            font-weight: bold; /* Negrita */
+            font-size: 2rem; /* Tamaño de fuente */
+        }
+   
+
+    </style>
+
+
+<br><br><br><br>
+
+    <!-- Carrusel de imágenes -->
+    <div class="container" style="background-color: #266479; padding: 20px; border-radius: 15px;">
+        <h2 style="color: #ffffff;">Animales Perdidos</h2>
+        <!-- Carrusel de imágenes -->
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Aquí van las imágenes -->
+                <div class="carousel-item active">
+                    <img src="https://www.gratistodo.com/wp-content/uploads/2016/11/Fondos-pantalla-perros-9.jpg" class="d-block w-100 rounded" alt="Imagen 1" style="object-fit: cover; height: 400px;">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://th.bing.com/th/id/R.e62f0dbce1c6e34f87d1f84b08e228b4?rik=y97HmTZtyiGy0w&riu=http%3a%2f%2fwww.pedroreina.net%2fsfd%2ffin%2fgato.jpg&ehk=OricjXxv7TIRrVJvRldPj2n752ZuGkB4SXzdRrc5hok%3d&risl=&pid=ImgRaw&r=0" class="d-block w-100 rounded" alt="Imagen 2" style="object-fit: cover; height: 400px;">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://th.bing.com/th/id/R.d4f974ec27cdae4e52a43a6f37e965b3?rik=w078J%2bNn39KuXQ&riu=http%3a%2f%2fwww.dzieckowpodrozy.pl%2fwp-content%2fuploads%2f20130714_124702.jpg&ehk=aulW%2fl6ATudW3OD0uDBwktMT0CyQdJG%2boAzEVkAfo78%3d&risl=&pid=ImgRaw&r=0" class="d-block w-100 rounded" alt="Imagen 3" style="object-fit: cover; height: 400px;">
+                </div>
+            </div>
+            <!-- Controles del carrusel -->
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+    </div>
+
+<br><br><br><br>
+ <!-- Noticias -->
+ <div id="noticias" class="container">
+    <h2 style="color: #ffffff;">Noticias</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1jEtdc.img?w=768&h=576&m=6" class="card-img-top" alt="Noticia 1">
+                <div class="card-body">
+                    <h5 class="card-title">Ola de calor: Cuál es la regla de los 5 segundos para proteger a tus mascotas</h5>
+                    <li><a href="https://www.msn.com/es-pe/salud/other/ola-de-calor-cu%C3%A1l-es-la-regla-de-los-5-segundos-para-proteger-a-tus-mascotas/ar-BB1jEqz5">ver aquí</a></li>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://media.ambito.com/p/5aea46215c503d9e806ed88170fd0cc2/adjuntos/239/imagenes/041/265/0041265626/655x368/smart/perros-y-ninosjpg.jpg" class="card-img-top" alt="Noticia 2">
+                <div class="card-body">
+                    <h5 class="card-title">Mascotas: la iniciativa de los hospitales para mejorar los tratamientos de pacientes</h5>
+                    <li><a href="https://www.ambito.com/salud/mascotas-la-iniciativa-los-hospitales-mejorar-los-tratamientos-pacientes-n5961358">ver aquí</a></li>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://images2-mega.cdn.mdstrm.com/meganoticias/2023/12/07/esquizofrenia-gato-mascota_433194_1_657202db168e0.jpg?d=610x610" class="card-img-top" alt="Noticia 3">
+                <div class="card-body">
+                    <h5 class="card-title">¿Tener gatos como mascotas podría aumentar el riesgo de padecer esquizofrenia? </h5>
+                    <li><a href="https://www.meganoticias.cl/calidad-de-vida/441728-relacion-gatos-de-mascota-tener-esquizofrenia-estudio-cientifico-seo.html">ver aquí</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+{% endblock %}

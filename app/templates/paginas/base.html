@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Título de la página{% endblock %}</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tu CSS personalizado -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos para el header fijo */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #266479; /* Color azul celeste */
+            color: #ffffff; /* Texto blanco */
+            z-index: 1000; /* Asegura que el header esté por encima del contenido */
+            padding: 10px 0; /* Agregado para ajustar el espaciado */
+        }
+
+        /* Estilos para el footer fijo */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #266479; /* Color azul celeste */
+            color: #ffffff; /* Texto blanco */
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Ajuste del espacio del contenido principal para evitar que se superponga con el header y footer */
+        main {
+            margin-top: 120px; /* Ajusta el espacio para el header */
+            margin-bottom: 80px; /* Ajusta el espacio para el footer */
+        }
+
+        /* Efecto al pasar el cursor sobre los botones del menú */
+        .nav-item .nav-link:hover {
+            color: #000000; /* Cambia el color del texto al pasar el cursor */
+            background-color: #266479; /* Cambia el color de fondo al pasar el cursor */
+        }
+
+        /* Color blanco para las letras */
+        .navbar-brand,
+        .nav-link {
+            color: #ffffff !important;
+        }
+
+        /* Estilo para el ícono de usuario */
+        .nav-item .nav-link .fa-user,
+        .nav-item .nav-link .fa-door-open {
+            margin-right: 5px;
+        }
+
+        /* Estilo para el logotipo */
+        .navbar-brand img {
+            border-radius: 50%;
+            margin-right: 10px;
+            width: 70px; /* Ajusta el tamaño */
+            height: 70px; /* Ajusta el tamaño */
+        }
+
+        /* Estilo para el título de la empresa */
+        .navbar-brand span {
+            font-family: 'Harlow Solid'; /* Cambia la fuente */
+            font-weight: bold; /* Negrita */
+            font-size: 2rem; /* Tamaño de fuente */
+        }
+        
+        /* Estilo para el fondo de la página */
+        body {
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGGRrIDmQI0px78cND6wnNnhsR_sRdR-H_k37FU1b_uCaVWkjqsi9eMqcZ7yd4rctVI12VDEHGb_RtUsiyFMf_iXplt9zhs_eueIsrVwNg9FePBeukXEvzQwFVqacDmIhk_yXhXl3dTvr5/s1600/papeispatinhas+%25281%2529.png'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la URL de tu imagen de fondo */
+            
+            background-position: center; /* Centra la imagen de fondo */
+            background-attachment: fixed; /* Hace que el fondo sea estático */
+        }
+        
+        /* Ocultar enlaces de registro e inicio de sesión cuando el usuario ha iniciado sesión */
+        .logged-in-links {
+            display: {% if user.is_authenticated %}none{% else %}block{% endif %};
+        }
+        
+        /* Mostrar enlace de cierre de sesión solo cuando el usuario ha iniciado sesión */
+        .logged-out-links {
+            display: {% if user.is_authenticated %}block{% else %}none{% endif %};
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="https://cdn.dribbble.com/userupload/3286190/file/original-22296f30f4ba884d2f4be544119e0757.png?compress=1&resize=752x" alt="Logotipo">
+                    <span>id Pets</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inicio' %}">
+                                <i class="fas fa-home"></i> Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Mascotas' %}">
+                                <i class="fas fa-paw"></i> Mascotas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'nosotros' %}">
+                                <i class="fas fa-users"></i> Acerca de nosotros
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                            <!-- Enlace de Editar Usuario -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'editar_usuario' %}">
+                                    <i class="fas fa-user-edit"></i> Editar Usuario
+                                </a>
+                            </li>
+                            <!-- Enlace de Cerrar Sesión -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'cerrar_sesion' %}">
+                                    <i class="fas fa-door-open"></i> Cerrar Sesión
+                                </a>
+                            </li>
+                        {% else %}
+                            <!-- Enlaces de Iniciar Sesión y Registrarse -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">
+                                    <i class="fas fa-user"></i> Iniciar Sesión
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'signup' %}">
+                                    <i class="fas fa-user-plus"></i> Registrarse
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+
+    <main role="main" class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <span class="text-muted">Derechos de autor &copy; 2024 | Id Pets </span>
+        </div>
+    </footer>
+
+    <!-- Enlace al archivo JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Harlow+Solid&display=swap" rel="stylesheet">
+</body>
+
+</html>

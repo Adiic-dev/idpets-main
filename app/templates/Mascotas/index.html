@@ -1,0 +1,22 @@
+{% extends 'paginas/base.html' %}
+
+<script src="firebase.js"></script>
+
+{% block title %}inicio{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Datos de la Mascota</h1>
+    <div class="mascota-info">
+        <p><strong>Nombre:</strong> Max</p>
+        <p><strong>Especie:</strong> Perro</p>
+        <p><strong>Raza:</strong> Labrador</p>
+        <p><strong>Edad:</strong> 3 años</p>
+        <p><strong>Color:</strong> Negro</p>
+        <p><strong>Descripción:</strong> Max es un perro muy juguetón y cariñoso.</p>
+    </div>
+    <button class="btn btn-primary" onclick="location.href='{% url 'editar_mascotas' %}'">Editar Mascota</button>
+    <button class="btn btn-primary" onclick="location.href='{% url 'registrar_mascotas' %}'">Registrar Mascota</button>
+</div>
+
+{% endblock %}

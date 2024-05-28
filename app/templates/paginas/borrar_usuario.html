@@ -1,0 +1,14 @@
+{% extends 'paginas/base.html' %}
+
+{% block title %}Borrar Cuenta{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Confirmar Borrar Cuenta</h2>
+    <p>¿Estás seguro de que deseas borrar tu cuenta?</p>
+    <form action="{% url 'borrar_usuario' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Sí, Borrar mi Cuenta</button>
+    </form>
+</div>
+{% endblock %}
