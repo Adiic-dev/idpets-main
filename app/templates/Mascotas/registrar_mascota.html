@@ -1,0 +1,102 @@
+{% extends 'paginas/base.html' %}
+
+{% block title %}Registrar Mascota{% endblock %}
+
+{% block content %}
+<style>
+    .mascota-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+    .mascota-form-label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .mascota-form-input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .mascota-btn-primary {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .mascota-btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="mascota-container">
+    <h1>Registrar Mascota</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.nombre.id_for_label }}" class="mascota-form-label">{{ form.nombre.label }}</label>
+            {{ form.nombre }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.especie.id_for_label }}" class="mascota-form-label">{{ form.especie.label }}</label>
+            {{ form.especie }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.raza.id_for_label }}" class="mascota-form-label">{{ form.raza.label }}</label>
+            {{ form.raza }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.sexo.id_for_label }}" class="mascota-form-label">{{ form.sexo.label }}</label>
+            {{ form.sexo }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.edad.id_for_label }}" class="mascota-form-label">{{ form.edad.label }}</label>
+            {{ form.edad }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.pelaje_color.id_for_label }}" class="mascota-form-label">{{ form.pelaje_color.label }}</label>
+            {{ form.pelaje_color }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.pelaje_tipo.id_for_label }}" class="mascota-form-label">{{ form.pelaje_tipo.label }}</label>
+            {{ form.pelaje_tipo }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.caracteristicas_distintivas.id_for_label }}" class="mascota-form-label">{{ form.caracteristicas_distintivas.label }}</label>
+            {{ form.caracteristicas_distintivas }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tamaño.id_for_label }}" class="mascota-form-label">{{ form.tamaño.label }}</label>
+            {{ form.tamaño }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.foto.id_for_label }}" class="mascota-form-label">{{ form.foto.label }}</label>
+            {{ form.foto }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.nombre_dueno.id_for_label }}" class="mascota-form-label">{{ form.nombre_dueno.label }}</label>
+            {{ form.nombre_dueno }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.numero_celular_dueno.id_for_label }}" class="mascota-form-label">{{ form.numero_celular_dueno.label }}</label>
+            {{ form.numero_celular_dueno }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.email_dueno.id_for_label }}" class="mascota-form-label">{{ form.email_dueno.label }}</label>
+            {{ form.email_dueno }}
+        </div>
+        <button type="submit" class="mascota-btn-primary">Registrar</button>
+    </form>
+</div>
+{% endblock %}
+

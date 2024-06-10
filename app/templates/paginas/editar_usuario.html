@@ -14,8 +14,12 @@
                     <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" value="{{ user.username }}">
                 </div>
                 <div class="form-group">
-                    <label for="contraseña">Contraseña:</label>
-                    <input type="password" class="form-control" id="contraseña" name="contraseña">
+                    <label for="contraseña_actual">Contraseña Actual:</label>
+                    <input type="password" class="form-control" id="contraseña_actual" name="contraseña_actual" required>
+                </div>
+                <div class="form-group">
+                    <label for="nueva_contraseña">Nueva Contraseña:</label>
+                    <input type="password" class="form-control" id="nueva_contraseña" name="nueva_contraseña">
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             </form>
@@ -24,6 +28,10 @@
             
             <form action="{% url 'borrar_usuario' %}" method="POST">
                 {% csrf_token %}
+                <div class="form-group">
+                    <label for="confirmar_contraseña">Contraseña Actual:</label>
+                    <input type="password" class="form-control" id="confirmar_contraseña" name="confirmar_contraseña" required>
+                </div>
                 <button type="submit" class="btn btn-danger">Borrar Cuenta</button>
             </form>
         </div>

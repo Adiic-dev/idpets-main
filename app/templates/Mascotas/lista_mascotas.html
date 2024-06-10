@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Mascotas</title>
+</head>
+<body>
+    <h1>Lista de Mascotas</h1>
+    <ul>
+        {% for mascota in mascotas %}
+            <li>{{ mascota.nombre }} - {{ mascota.especie }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

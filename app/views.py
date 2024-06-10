@@ -9,6 +9,10 @@ from django.contrib.auth import logout
 from .forms import LoginForm
 from django.contrib.auth import login as auth_login 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm  # Agrega esta línea
+from django.contrib import messages
+from .forms import MascotaForm
+from .models import Mascota
 
 # Create your views here.
 
@@ -20,8 +24,23 @@ def nosotros(request):
 def Mascotas(request):
     return render(request, 'Mascotas/index.html')
 
-def registrar_mascotas(request):
-    return render(request, 'Mascotas/registrar_mascotas.html')
+
+
+def registrar_mascota(request):
+    if request.method == 'POST':
+        form = MascotaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_mascotas')  # Redirigir a la lista de mascotas
+    else:
+        form = MascotaForm()
+    return render(request, 'mascotas/registrar_mascota.html', {'form': form})
+
+def lista_mascotas(request):
+    mascotas = Mascota.objects.all()
+    return render(request, 'mascotas/lista_mascotas.html', {'mascotas': mascotas})
+
+
 
 def editar_mascotas(request):
     return render(request, 'Mascotas/editar_mascotas.html')
@@ -61,27 +80,43 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+
 @login_required
 def editar_usuario(request):
     user = request.user
     if request.method == 'POST':
         nombre_usuario = request.POST.get('nombre_usuario')
-        nueva_contraseña = request.POST.get('contraseña')
         
         # Actualizar nombre de usuario si es diferente
         if nombre_usuario != user.username:
             user.username = nombre_usuario
             user.save()
         
-        # Actualizar contraseña si es diferente
-        if nueva_contraseña:
-            user.set_password(nueva_contraseña)
-            user.save()
+        # Obtener la contraseña actual del formulario
+        contraseña_actual = request.POST.get('contraseña_actual')
         
+        # Verificar si la contraseña actual es válida antes de guardar los cambios
+        if user.check_password(contraseña_actual):
+            # Obtener el formulario de cambio de contraseña y validar
+            password_change_form = PasswordChangeForm(user=user, data=request.POST)
+            if password_change_form.is_valid():
+                password_change_form.save()  # Guardar la nueva contraseña
+                messages.success(request, 'Contraseña actualizada exitosamente.')
+            else:
+                for field in password_change_form:
+                    for error in field.errors:
+                        messages.error(request, f'{field.label}: {error}')
+        else:
+            messages.error(request, 'La contraseña actual es incorrecta.')
+
         return redirect('inicio')  # Redirigir a la página de inicio después de editar el perfil
     else:
-        return render(request, 'editar_usuario.html', {'user': user})
+        password_change_form = PasswordChangeForm(user=request.user)
+        return render(request, 'editar_usuario.html', {'user': user, 'password_change_form': password_change_form})
 
+    
 @login_required
 def borrar_usuario(request):
     if request.method == 'POST':

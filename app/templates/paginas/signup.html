@@ -60,7 +60,6 @@
             background-position: center; /* Centra la imagen de fondo */
             background-attachment: fixed; /* Hace que el fondo sea estático */
         }
-    </styl
     </style>
 </head>
 <body>
@@ -93,6 +92,10 @@
                     <br> <!-- Agregamos un salto de línea -->
                     {{ form.password2 }}
                     {{ form.password2.errors }}
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="politicas" name="politicas">
+                    <label class="form-check-label" for="politicas">Acepto las políticas de privacidad y seguridad de datos</label>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
             </form>
