@@ -1,0 +1,26 @@
+{% extends 'paginas/base.html' %}
+
+{% block title %}Detalle de Mascota: {{ mascota.nombre }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Detalle de Mascota</h1>
+    <div class="card">
+        <img src="{{ mascota.foto.url }}" class="card-img-top" alt="{{ mascota.nombre }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ mascota.nombre }}</h5>
+            <p class="card-text"><strong>Especie:</strong> {{ mascota.especie }}</p>
+            <p class="card-text"><strong>Raza:</strong> {{ mascota.raza }}</p>
+            <p class="card-text"><strong>Sexo:</strong> {{ mascota.get_sexo_display }}</p>
+            <p class="card-text"><strong>Edad:</strong> {{ mascota.edad }}</p>
+            <p class="card-text"><strong>Color del Pelaje:</strong> {{ mascota.pelaje_color }}</p>
+            <p class="card-text"><strong>Tipo de Pelaje:</strong> {{ mascota.get_pelaje_tipo_display }}</p>
+            <p class="card-text"><strong>Características Distintivas:</strong> {{ mascota.caracteristicas_distintivas }}</p>
+            <p class="card-text"><strong>Tamaño:</strong> {{ mascota.tamaño }}</p>
+            <p class="card-text"><strong>Nombre del Dueño:</strong> {{ mascota.nombre_dueno }}</p>
+            <p class="card-text"><strong>Número de Celular del Dueño:</strong> {{ mascota.numero_celular_dueno }}</p>
+            <p class="card-text"><strong>Correo Electrónico del Dueño:</strong> {{ mascota.email_dueno }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

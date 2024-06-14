@@ -13,6 +13,7 @@ from django.contrib.auth.forms import PasswordChangeForm  # Agrega esta línea
 from django.contrib import messages
 from .forms import MascotaForm
 from .models import Mascota
+from django import forms
 
 # Create your views here.
 
@@ -22,24 +23,40 @@ def nosotros(request):
     return render (request,'paginas/nosotros.html')
 
 def Mascotas(request):
-    return render(request, 'Mascotas/index.html')
+    return render(request, 'Mascotas/Mascota.html')
 
 
-
+@login_required
 def registrar_mascota(request):
     if request.method == 'POST':
         form = MascotaForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('lista_mascotas')  # Redirigir a la lista de mascotas
+            mascota = form.save(commit=False)
+            mascota.usuario = request.user  # Asocia la mascota con el usuario actual
+            mascota.save()
+            messages.success(request, '¡La mascota se registró correctamente!')
+            return redirect('Mascotas')  # Cambia 'Mascotas' por la URL correspondiente
     else:
         form = MascotaForm()
-    return render(request, 'mascotas/registrar_mascota.html', {'form': form})
+    return render(request, 'Mascotas/registrar_mascota.html', {'form': form})
 
+
+
+@login_required
 def lista_mascotas(request):
-    mascotas = Mascota.objects.all()
-    return render(request, 'mascotas/lista_mascotas.html', {'mascotas': mascotas})
+    mascotas = Mascota.objects.filter(usuario=request.user)
+    return render(request, 'Mascotas/Mascota.html', {'mascotas': mascotas})
 
+
+
+def detalle_mascota(request, mascota_id):
+    mascota = get_object_or_404(Mascota, pk=mascota_id)
+    return render(request, 'mascotas/detalle_mascota.html', {'mascota': mascota})
+
+class MascotaForm(forms.ModelForm):
+    class Meta:
+        model = Mascota
+        fields = '__all__'
 
 
 def editar_mascotas(request):

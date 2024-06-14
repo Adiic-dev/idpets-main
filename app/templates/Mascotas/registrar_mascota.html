@@ -38,65 +38,94 @@
     .mascota-btn-primary:hover {
         background-color: #0056b3;
     }
+    .numero-celular-dueno {
+        background-color: #f0f0f0;
+    }
 </style>
+
 <div class="mascota-container">
     <h1>Registrar Mascota</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            <label for="{{ form.nombre.id_for_label }}" class="mascota-form-label">{{ form.nombre.label }}</label>
-            {{ form.nombre }}
+            <label for="{{ form.nombre.id_for_label }}" class="mascota-form-label">Nombre de la Mascota</label>
+            <input type="text" name="nombre" id="id_nombre" class="mascota-form-input" placeholder="Nombre de la mascota" required>
         </div>
         <div class="form-group">
-            <label for="{{ form.especie.id_for_label }}" class="mascota-form-label">{{ form.especie.label }}</label>
-            {{ form.especie }}
+            <label for="{{ form.especie.id_for_label }}" class="mascota-form-label">Especie</label>
+            <select name="especie" id="id_especie" class="mascota-form-input" required>
+                <option value="" selected disabled>Selecciona una especie</option>
+                <option value="canino">Canino</option>
+                <option value="felino">Felino</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.raza.id_for_label }}" class="mascota-form-label">Raza</label>
+            <input type="text" name="raza" id="id_raza" class="mascota-form-input" placeholder="Raza" required>
         </div>
         <div class="form-group">
-            <label for="{{ form.raza.id_for_label }}" class="mascota-form-label">{{ form.raza.label }}</label>
-            {{ form.raza }}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.sexo.id_for_label }}" class="mascota-form-label">{{ form.sexo.label }}</label>
+            <label for="{{ form.sexo.id_for_label }}" class="mascota-form-label">Sexo</label>
             {{ form.sexo }}
         </div>
         <div class="form-group">
-            <label for="{{ form.edad.id_for_label }}" class="mascota-form-label">{{ form.edad.label }}</label>
-            {{ form.edad }}
+            <label for="{{ form.edad.id_for_label }}" class="mascota-form-label">Edad</label>
+            <input type="number" name="edad" id="id_edad" class="mascota-form-input" placeholder="Edad" required>
         </div>
         <div class="form-group">
-            <label for="{{ form.pelaje_color.id_for_label }}" class="mascota-form-label">{{ form.pelaje_color.label }}</label>
-            {{ form.pelaje_color }}
+            <label for="{{ form.pelaje_color.id_for_label }}" class="mascota-form-label">Color del Pelaje</label>
+            <input type="text" name="pelaje_color" id="id_pelaje_color" class="mascota-form-input" placeholder="Color del pelaje" required>
         </div>
         <div class="form-group">
-            <label for="{{ form.pelaje_tipo.id_for_label }}" class="mascota-form-label">{{ form.pelaje_tipo.label }}</label>
-            {{ form.pelaje_tipo }}
+            <label for="id_pelaje_tipo" class="mascota-form-label">Tipo de Pelaje</label>
+            <select name="pelaje_tipo" id="id_pelaje_tipo" class="mascota-form-input" required>
+                <option value="" selected disabled>Selecciona un tipo de pelaje</option>
+                <option value="pelilargo">Pelilargo</option>
+                <option value="pelicorto">Pelicorto</option>
+                <option value="otro">otro</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.caracteristicas_distintivas.id_for_label }}" class="mascota-form-label">Características Distintivas</label>
+            <textarea name="caracteristicas_distintivas" id="id_caracteristicas_distintivas" class="mascota-form-input" placeholder="Características distintivas"></textarea>
         </div>
         <div class="form-group">
-            <label for="{{ form.caracteristicas_distintivas.id_for_label }}" class="mascota-form-label">{{ form.caracteristicas_distintivas.label }}</label>
-            {{ form.caracteristicas_distintivas }}
+            <label for="{{ form.tamaño.id_for_label }}" class="mascota-form-label">Tamaño</label>
+            <select name="tamaño" id="id_tamaño" class="mascota-form-input" required>
+                <option value="" selected disabled>Selecciona un tamaño</option>
+                <option value="pequeño">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+            </select>
         </div>
         <div class="form-group">
-            <label for="{{ form.tamaño.id_for_label }}" class="mascota-form-label">{{ form.tamaño.label }}</label>
-            {{ form.tamaño }}
+            <label for="{{ form.foto.id_for_label }}" class="mascota-form-label">Foto de la Mascota</label>
+            <input type="file" name="foto" id="id_foto" class="mascota-form-input" accept="image/*">
         </div>
         <div class="form-group">
-            <label for="{{ form.foto.id_for_label }}" class="mascota-form-label">{{ form.foto.label }}</label>
-            {{ form.foto }}
+            <label for="{{ form.nombre_dueno.id_for_label }}" class="mascota-form-label">Nombre del Dueño</label>
+            <input type="text" name="nombre_dueno" id="id_nombre_dueno" class="mascota-form-input" placeholder="Nombre del dueño" required>
         </div>
-        <div class="form-group">
-            <label for="{{ form.nombre_dueno.id_for_label }}" class="mascota-form-label">{{ form.nombre_dueno.label }}</label>
-            {{ form.nombre_dueno }}
+        <div class="form-group" style="position: relative;">
+            <label for="id_numero_celular_dueno" class="mascota-form-label">Número de Celular del Dueño</label>
+            <input type="text" name="numero_celular_dueno" id="id_numero_celular_dueno" class="mascota-form-input" style="padding-left: 50px;" placeholder="+56912345678" minlength="8" maxlength="12" required>
+            <div style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #666;"></div>
         </div>
+        
         <div class="form-group">
-            <label for="{{ form.numero_celular_dueno.id_for_label }}" class="mascota-form-label">{{ form.numero_celular_dueno.label }}</label>
-            {{ form.numero_celular_dueno }}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.email_dueno.id_for_label }}" class="mascota-form-label">{{ form.email_dueno.label }}</label>
-            {{ form.email_dueno }}
+            <label for="{{ form.email_dueno.id_for_label }}" class="mascota-form-label">Correo Electrónico del Dueño</label>
+            <input type="email" name="email_dueno" id="id_email_dueno" class="mascota-form-input" placeholder="Correo electrónico del dueño">
         </div>
         <button type="submit" class="mascota-btn-primary">Registrar</button>
     </form>
 </div>
 {% endblock %}
-
